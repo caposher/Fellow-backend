@@ -3,13 +3,9 @@ const logger = require('../../services/logger.service')
 const ObjectId = require('mongodb').ObjectId
 
 async function query(filterBy) {
-    // console.log('filterBy', filterBy)
     try {
         const filterCriteria = _buildFilterCriteria(filterBy)
-        // const SortCriteria = _buildSortCriteria(filterBy)
-
         const collection = await dbService.getCollection('board')
-        // var boards = await collection.find(filterCriteria).sort(SortCriteria).toArray()
         var boards = await collection.find(filterCriteria).toArray()
         return boards
     } catch (err) {
@@ -17,6 +13,7 @@ async function query(filterBy) {
         throw err
     }
 }
+
 // function _buildSortCriteria(filterBy) {
 //     const criteria = {}
 //     if (filterBy.sort) {
@@ -40,25 +37,9 @@ async function query(filterBy) {
 
 function _buildFilterCriteria(filterBy) {
     const criteria = {}
-    // if (filterBy.txt) {
-    //     const regex = new RegExp(filterBy.txt, 'i')
-    //     criteria.title = { $regex: regex }
-    // }
     if (filterBy.user) {
         criteria.$or = [{ members: filterBy.user }, { createdBy: filterBy.user }]
     }
-
-    // if (filterBy.status === 'In stock') criteria.inStock = true
-    // else if (filterBy.status === 'Out of stock') criteria.inStock = false
-
-    // if (filterBy.labels && filterBy.labels.length) {
-    //     criteria.labels = { $all: filterBy.labels }
-    // }
-
-    // if (filterBy.labels) {
-    //     if (filterBy.labels.length > 1) criteria.labels = filterBy.labels
-    //     else criteria.labels = filterBy.labels[0]
-    // }
     return criteria
 }
 
@@ -87,7 +68,6 @@ async function remove(boardId) {
 async function add(board) {
     try {
         const collection = await dbService.getCollection('board')
-        // const addedBoard = await collection.insertOne(board)
         await collection.insertOne(board)
         return board
     } catch (err) {
@@ -108,8 +88,6 @@ async function update(board) {
         throw err
     }
 }
-
-
 
 module.exports = {
     remove,
