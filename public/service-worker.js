@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.641175bff4184d5119c124b778d85b75.js"
+  "/precache-manifest.718afe546756093ebabfc0151f82fc8f.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "fellow"});
