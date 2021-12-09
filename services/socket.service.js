@@ -14,13 +14,20 @@ function connectSockets(http, session) {
         socket.on('disconnect', socket => {
             console.log('Someone disconnected')
         })
-        socket.on('chat topic', topic => {
-            if (socket.myTopic === topic) return;
-            if (socket.myTopic) {
-                socket.leave(socket.myTopic)
+        socket.on('board new-enter', boardId => {
+            console.log('boardId', boardId)
+            if (socket.boardId === boardId) return;
+            if (socket.boardId) {
+                socket.leave(socket.boardId)
             }
-            socket.join(topic)
-            socket.myTopic = topic
+            socket.join(boardId)
+            socket.boardId = boardId
+        })
+        socket.on('board updated', board => {
+            // emits to all sockets:
+            // gIo.emit('chat addMsg', msg)
+            // emits only to sockets in the same room
+            gIo.to(socket.boardId).emit('board pushed', board)
         })
         socket.on('chat newMsg', msg => {
             console.log('Emitting Chat msg', msg);
