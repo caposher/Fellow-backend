@@ -13,12 +13,24 @@ async function login(req, res) {
     }
 }
 
+async function googleLogin(req, res) {
+    const { username, fullname, imgUrl } = req.body
+    try {
+        const user = await authService.googleLogin(username, fullname, imgUrl)
+        req.session.user = user
+        res.json(user)
+    } catch (err) {
+        logger.error('Failed to Login ' + err)
+        res.status(401).send({ err: 'Failed to Login' })
+    }
+}
+
 async function signup(req, res) {
     try {
-        const { username, password, fullName } = req.body
+        const { username, password, fullname } = req.body
         // Never log passwords
         // logger.debug(fullname + ', ' + username + ', ' + password)
-        const account = await authService.signup(username, password, fullName)
+        const account = await authService.signup(username, password, fullname)
         logger.debug(`auth.route - new account created: ` + JSON.stringify(account))
         const user = await authService.login(username, password)
         req.session.user = user
@@ -41,5 +53,6 @@ async function logout(req, res) {
 module.exports = {
     login,
     signup,
-    logout
+    logout,
+    googleLogin
 }

@@ -9,7 +9,8 @@ module.exports = {
     getByUsername,
     remove,
     update,
-    add
+    add,
+    addGoogleUser
 }
 
 async function query(filterBy = {}) {
@@ -70,7 +71,7 @@ async function update(user) {
         const userToSave = {
             _id: ObjectId(user._id),
             username: user.username,
-            fullName: user.fullName,
+            fullName: user.fullname,
         }
         const collection = await dbService.getCollection('user')
         await collection.updateOne({ '_id': userToSave._id }, { $set: userToSave })
@@ -87,8 +88,27 @@ async function add(user) {
         const userToAdd = {
             username: user.username,
             password: user.password,
-            fullName: user.fullName,
+            fullname: user.fullname,
             isAdmin: false
+        }
+        const collection = await dbService.getCollection('user')
+        await collection.insertOne(userToAdd)
+        return userToAdd
+    } catch (err) {
+        logger.error('cannot insert user', err)
+        throw err
+    }
+}
+async function addGoogleUser(user) {
+    console.log('add google user', user);
+    try {
+        // peek only updatable fields!
+        const userToAdd = {
+            username: user.username,
+            fullname: user.fullname,
+            isAdmin: false,
+            imgUrl: user.imgUrl,
+            googleUser:true
         }
         const collection = await dbService.getCollection('user')
         await collection.insertOne(userToAdd)
