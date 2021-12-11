@@ -16,12 +16,11 @@ async function login(username, password) {
     return user
 }
 
-async function googleLogin(username, fullname, imgUrl) {
+async function externalLogin(username, fullname, imgUrl, googleUser, fbUser) {
     logger.debug(`auth.service - google login with username: ${username}`)
-
     const user = await userService.getByUsername(username)
     if (!user) {
-        const newUser = await userService.addGoogleUser({ username, fullname, imgUrl })
+        const newUser = await userService.addExternalUser({ username, fullname, imgUrl, googleUser, fbUser })
         return newUser
     }
     return user
@@ -43,5 +42,5 @@ async function signup(username, password, fullname) {
 module.exports = {
     signup,
     login,
-    googleLogin
+    externalLogin
 }

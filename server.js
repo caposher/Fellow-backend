@@ -29,7 +29,7 @@ if (process.env.NODE_ENV === 'production') {
         credentials: true
     }
     app.use(cors(corsOptions))
-}
+} 
 
 const authRoutes = require('./api/auth/auth.routes')
 const userRoutes = require('./api/user/user.routes')

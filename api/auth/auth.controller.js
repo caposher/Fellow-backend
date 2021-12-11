@@ -13,10 +13,12 @@ async function login(req, res) {
     }
 }
 
-async function googleLogin(req, res) {
-    const { username, fullname, imgUrl } = req.body
+async function externalLogin(req, res) {
+    const { username, fullname, imgUrl ,googleUser,
+        fbUser} = req.body
     try {
-        const user = await authService.googleLogin(username, fullname, imgUrl)
+        const user = await authService.externalLogin(username, fullname, imgUrl,googleUser,
+            fbUser)
         req.session.user = user
         res.json(user)
     } catch (err) {
@@ -54,5 +56,5 @@ module.exports = {
     login,
     signup,
     logout,
-    googleLogin
+    externalLogin
 }

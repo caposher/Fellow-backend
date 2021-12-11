@@ -5,8 +5,10 @@ const ObjectId = require('mongodb').ObjectId
 async function query(filterBy) {
     try {
         const filterCriteria = _buildFilterCriteria(filterBy)
+        // console.log('filterCriteria', filterCriteria);
         const collection = await dbService.getCollection('board')
         var boards = await collection.find(filterCriteria).toArray()
+        // console.log('boards', boards);
         return boards
     } catch (err) {
         logger.error('cannot find boards', err)
@@ -38,8 +40,10 @@ async function query(filterBy) {
 function _buildFilterCriteria(filterBy) {
     const criteria = {}
     if (filterBy.user) {
-        criteria.$or = [{ members: filterBy.user }, { createdBy: filterBy.user }]
+        var user = JSON.parse(filterBy.user)
+        criteria.$or = [{ members: user }, { createdBy: user }]
     }
+console.log('cr', criteria);
     return criteria
 }
 
