@@ -20,8 +20,8 @@ async function query(filterBy = {}) {
         var users = await collection.find(criteria).toArray()
         users = users.map(user => {
             delete user.password
-            user.isHappy = true
-            user.createdAt = ObjectId(user._id).getTimestamp()
+            // user.isHappy = true
+            // user.createdAt = ObjectId(user._id).getTimestamp()
             // Returning fake fresh data
             // user.createdAt = Date.now() - (1000 * 60 * 60 * 24 * 3) // 3 days ago
             return user
@@ -108,7 +108,7 @@ async function addGoogleUser(user) {
             fullname: user.fullname,
             isAdmin: false,
             imgUrl: user.imgUrl,
-            googleUser:true
+            googleUser: true
         }
         const collection = await dbService.getCollection('user')
         await collection.insertOne(userToAdd)
@@ -128,7 +128,7 @@ function _buildCriteria(filterBy) {
                 username: txtCriteria
             },
             {
-                fullName: txtCriteria
+                fullname: txtCriteria
             }
         ]
     }
