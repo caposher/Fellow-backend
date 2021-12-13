@@ -1,7 +1,7 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2c52a2ab0c515f81b383",
-    "url": "/css/app.ec17df05.css"
+    "revision": "ba8567a60129e33b40c5",
+    "url": "/css/app.17ee3678.css"
   },
   {
     "revision": "eb868df821334fe90174",
@@ -100,12 +100,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/menu-photos.48948499.jpg"
   },
   {
-    "revision": "f8ac7f15acccc8005088dcf1555177f5",
+    "revision": "bf29cbfdd2ba8fce592b5a9f6aa92ff0",
     "url": "/index.html"
   },
   {
-    "revision": "2c52a2ab0c515f81b383",
-    "url": "/js/app.808db992.js"
+    "revision": "ba8567a60129e33b40c5",
+    "url": "/js/app.275c0053.js"
   },
   {
     "revision": "eb868df821334fe90174",
@@ -118,9 +118,5 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "735ab4f94fbcd57074377afca324c813",
     "url": "/robots.txt"
-  },
-  {
-    "revision": "3bc3455f39e3e1380368093453977868",
-    "url": "/‏‏favicon - עותק.png"
   }
 ]);
