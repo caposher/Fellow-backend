@@ -2,13 +2,7 @@
   "name": "fellow",
   "short_name": "fellow",
   "theme_color": "#4DBA87",
-  "icons": [
-    {
-      "src": "<%= BASE_URL %>favicon.ico",
-      "sizes": "16x16",
-      "type": "image/png"
-    }
-  ],
+  "icons": [],
   "start_url": ".",
   "display": "standalone",
   "background_color": "#000000"
