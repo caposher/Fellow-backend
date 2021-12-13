@@ -27,32 +27,33 @@ function connectSockets(http, session) {
             // emits to all sockets:
             // gIo.emit('chat addMsg', msg)
             // emits only to sockets in the same room
-            gIo.to(socket.boardId).emit('board pushed', board)
+            // gIo.to(socket.boardId).emit('board pushed', board)
+            socket.broadcast.to(socket.boardId).emit('board pushed', board)
         })
-        socket.on('chat newMsg', msg => {
-            console.log('Emitting Chat msg', msg);
-            // emits to all sockets:
-            // gIo.emit('chat addMsg', msg)
-            // emits only to sockets in the same room
-            gIo.to(socket.myTopic).emit('chat addMsg', msg)
-        })
-        socket.on('chat sendTyping', fullName => {
-            console.log('Emitting Chat msg', fullName);
-            // emits to all sockets:
-            // gIo.emit('chat addMsg', msg)
-            // emits only to sockets in the same room
-            socket.broadcast.to(socket.myTopic).emit('chat userTyping', fullName)
-        })
-        socket.on('user-watch', userId => {
-            socket.join('watching:' + userId)
-        })
-        socket.on('set-user-socket', userId => {
-            logger.debug(`Setting (${socket.id}) socket.userId = ${userId}`)
-            socket.userId = userId
-        })
-        socket.on('unset-user-socket', () => {
-            delete socket.userId
-        })
+        // socket.on('chat newMsg', msg => {
+        //     console.log('Emitting Chat msg', msg);
+        //     // emits to all sockets:
+        //     // gIo.emit('chat addMsg', msg)
+        //     // emits only to sockets in the same room
+        //     gIo.to(socket.myTopic).emit('chat addMsg', msg)
+        // })
+        // socket.on('chat sendTyping', fullName => {
+        //     console.log('Emitting Chat msg', fullName);
+        //     // emits to all sockets:
+        //     // gIo.emit('chat addMsg', msg)
+        //     // emits only to sockets in the same room
+        //     socket.broadcast.to(socket.myTopic).emit('chat userTyping', fullName)
+        // })
+        // socket.on('user-watch', userId => {
+        //     socket.join('watching:' + userId)
+        // })
+        // socket.on('set-user-socket', userId => {
+        //     logger.debug(`Setting (${socket.id}) socket.userId = ${userId}`)
+        //     socket.userId = userId
+        // })
+        // socket.on('unset-user-socket', () => {
+        //     delete socket.userId
+        // })
 
     })
 }
